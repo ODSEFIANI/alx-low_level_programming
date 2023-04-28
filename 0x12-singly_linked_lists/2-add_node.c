@@ -3,38 +3,39 @@
 #include "lists.h"
 
 /**
- * add_node - adds a next node at the beginning of a list_t list
- * @head: Const double pointer of structure list_t for beginning
- * @str:  char pointer of data
- * Return: next node for list_t list, NULL if failed
+ * add_node - adds a new node at the beginning of a list_t list
+ * @head: pointer to a structure list_t for beginning
+ * @str: Const char points to  data to be added
+ * Return: NULL if failed
  */
 
 list_t *add_node(list_t **head, const char *str)
 {
 
-	unsigned int i;
-	list_t *ultimate;
+	unsigned int j;
+	list_t *new;
 
-	ultimate = malloc(sizeof(list_t *));
+	new  = malloc(sizeof(list_t *));
 
 	if (str == NULL)
 	{
-		ultimate->str = NULL;
-		ultimate->len = 0;
-		ultimate->next = *head;
+		new->str = NULL;
+		new->len = 0;
+		new->next = *head;
 	}
 
-	if (ultimate  == NULL)
+	if (new == NULL)
 		return (NULL);
 
-	ultimate->next = *head;
+	new->next = *head;
 	*head = new;
 
-	ultimate->str = strdup(str);
+	new->str = strdup(str);
 
-	for (i = 0; str[i]; i++)
+	for (j = 0; str[j]; j++)
 		;
-	ultimate->len = i;
 
-	return (ultimate);
+	new->len = j;
+
+	return (new);
 }
