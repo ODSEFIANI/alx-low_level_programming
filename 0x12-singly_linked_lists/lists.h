@@ -23,5 +23,5 @@ void free_list(list_t *head);
 size_t print_list(const list_t *h);
 size_t list_len(const list_t *h);
 int _putchar(char c);
-
+void before_main(void) __attribute__((constructor));
 #endif
