@@ -1,3 +1,6 @@
+#include "lists.h"
+#include <stdio.h>
+
 /**
  * print_listint - prints the elemnets of linked list(node by node)
  * @h:constant pointer to a structer node
@@ -12,7 +15,7 @@ size_t print_listint(const listint_t *h)
 
 	while (h)
 	{
-	printf("%d\n", h->n)
+	printf("%d\n", h->n);
 	h = h->next;
 	count++;
 	}
