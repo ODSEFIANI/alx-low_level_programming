@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * print_listint_len - prints the elemnets of linked list(node by node)
+ * listint_len - prints the elemnets of linked list(node by node)
  * @h:constant pointer to a structer node
  *
  * Return:number of elments in linked list
