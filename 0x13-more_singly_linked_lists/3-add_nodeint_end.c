@@ -1,3 +1,5 @@
+#include"lists.h"
+
 /**
  * add_nodeint_end - adds a node to the end of a the linked list
  * @head: pointer to the head of the list
