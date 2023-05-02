@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "lists.h"
 /**
  * a - make a new the  arrayay of nodes with new node
