@@ -4,13 +4,43 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+/**
+ * struct shash_node_s - Node of a rted hash table
+ * @key: The uniqustring
+ * @value: The value coronding to the key
+ * @next: A pointer to the next node of the list
+ * @sprev: A pointer to ths element of the sorted linked list
+ * @snext: A poine nef the sorted linked list
+ */
+typedef struct shash_node_s
+{
+    char *key;
+    char *value;
+    struct shash_node_s *next;
+    struct shash_node_s *sprev;
+    struct shash_node_s *snext;
+} shash_node_t;
+
+/**
+ * struct shash_table_s - Sorttable data structure
+ * @size: The size of the array
+ * @array: An arrzlision handling method.
+ * @shead: A pointer to tt element of the sorted linked list
+ * @stail: A pointer to nt of the sorted linked list
+ */
+typedef struct shash_table_s
+{
+    unsigned long int size;
+    shash_node_t **array;
+    shash_node_t *shead;
+    shash_node_t *stail;
+} shash_table_t;
 
 /**
  * struct hash_node_s - Node of a hash table
- *
- * @key: The ketring
- * @value: The valurresponding to a key
- * @next: A per to the next node in the list
+ * @key: The unique string
+ * @value: The valsponding to the key
+ * @next: A pointer te of the list
  */
 typedef struct hash_node_s
 {
@@ -20,17 +50,16 @@ typedef struct hash_node_s
 } hash_node_t;
 
 /**
- * struct hash_table_s - Hash table data structure
- *
- * @size: The sizehe array
- * @array: An  size @size
- * Each cell of this airst node of a linked list,
+ * struct hash_table_s - Hash tabla structure
+ * @size: The size of the 
+ * @array: An array ofable llision handling method.
  */
 typedef struct hash_table_s
 {
     unsigned long int size;
     hash_node_t **array;
 } hash_table_t;
+
 
 hash_table_t *hash_table_create(unsigned long int size);
 unsigned long int hash_djb2(const unsigned char *str);
