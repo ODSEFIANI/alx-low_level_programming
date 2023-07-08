@@ -1,49 +1,62 @@
-#include "hash_tables.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
+#include "hash_tables.h"
+
+/** by noguiaa */
 
 /**
- * hash_table_set -  function that adds an element to the hash table.
- * @ht: The table
- * @key: The key
- * @value: The value
+ * hash_table_set - Add an element to the hash table.
  *
- *  Return: 1 on success, 0 on failure
+ * @ht: The hash table.
+ * @key: The given key.
+ * @value: The given value.
+ *
+ * Return: 1 (Success) | 0 (Failure).
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	unsigned long int indx = 0;
-	hash_node_t *new_hash_node = NULL;
-	hash_node_t *temp = NULL;
+    unsigned long int index;
+    hash_node_t *new_node;
+    char *value_dup, *key_dup;
 
-	if (!ht || !key || !(*key) || !value)
-		return (0);
+    if (!ht || (!key || !(*key)) || !value)
+        return 0;
 
-	indx = key_index((unsigned char *)key, ht->size);
-	temp = ht->array[indx];
+    index = key_index((unsigned char *)key, ht->size);
 
-	/* check if key exists */
-	while (temp && strcmp(temp->key, key) != 0)
-		temp = temp->next;
+    value_dup = strdup(value);
+    if (!value_dup)
+        return 0;
 
-	/* update value if key already exists */
-	if (temp)
-	{
-		free(temp->value);
-		temp->value = strdup(value);
-		return (1);
-	}
+    /* Update value if key already exists */
+    new_node = ht->array[index];
+    while (new_node)
+    {
+        if (!strcmp(new_node->key, key))
+        {
+            free(new_node->value);
+            new_node->value = value_dup;
+            return 1;
+        }
+        new_node = new_node->next;
+    }
 
-	/* add new node if key not found */
+    key_dup = strdup(key);
+    if (!key_dup)
+    {
+        free(value_dup);
+        return 0;
+    }
 
-	new_hash_node = malloc(sizeof(*new_hash_node));
-	if (!new_hash_node)
-		return (0);
-
-	new_hash_node->key = strdup(key);
-	new_hash_node->value = strdup(value);
-
-	new_hash_node->next = ht->array[indx];
-	ht->array[indx] = new_hash_node;
-	return (1);
+    /* Otherwise, add new element */
+    new_node = malloc(sizeof(*new_node));
+    if (!new_node)
+        return 0;
+    new_node->key = key_dup;
+    new_node->value = value_dup;
+    new_node->next = ht->array[index];
+    ht->array[index] = new_node;
+    return 1;
 }
+
