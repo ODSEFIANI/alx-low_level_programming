@@ -1,54 +1,49 @@
 #include "hash_tables.h"
 #include <stdlib.h>
 #include <string.h>
-#include "hash_tables.h"
-#include <stdlib.h>
-#include <string.h>
 
 /**
- * hash_table_set - Adds an element to the hash table.
+ * hash_table_set -  function that adds an element to the hash table.
+ * @ht: The table
+ * @key: The key
+ * @value: The value
  *
- * @ht: The hash table.
- * @key: The key.
- * @value: The value.
- *
- * Return: 1 on success, 0 on failure.
+ *  Return: 1 on success, 0 on failure
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-    unsigned long int index = 0;
-    hash_node_t *new_node = NULL;
-    hash_node_t *current_node = NULL;
+	unsigned long int indx = 0;
+	hash_node_t *new_hash_node = NULL;
+	hash_node_t *temp = NULL;
 
-    if (!ht || !key || !(*key) || !value)
-        return 0;
+	if (!ht || !key || !(*key) || !value)
+		return (0);
 
-    index = key_index((unsigned char *)key, ht->size);
-    current_node = ht->array[index];
+	indx = key_index((unsigned char *)key, ht->size);
+	temp = ht->array[indx];
 
-    /* Check if key exists */
-    while (current_node && strcmp(current_node->key, key) != 0)
-        current_node = current_node->next;
+	/* check if key exists */
+	while (temp && strcmp(temp->key, key) != 0)
+		temp = temp->next;
 
-    /* Update value if key already exists */
-    if (current_node)
-    {
-        free(current_node->value);
-        current_node->value = strdup(value);
-        return 1;
-    }
+	/* update value if key already exists */
+	if (temp)
+	{
+		free(temp->value);
+		temp->value = strdup(value);
+		return (1);
+	}
 
-    /* Add new node if key not found */
-    new_node = malloc(sizeof(*new_node));
-    if (!new_node)
-        return 0;
+	/* add new node if key not found */
 
-    new_node->key = strdup(key);
-    new_node->value = strdup(value);
+	new_hash_node = malloc(sizeof(*new_hash_node));
+	if (!new_hash_node)
+		return (0);
 
-    new_node->next = ht->array[index];
-    ht->array[index] = new_node;
+	new_hash_node->key = strdup(key);
+	new_hash_node->value = strdup(value);
 
-    return 1;
+	new_hash_node->next = ht->array[indx];
+	ht->array[indx] = new_hash_node;
+	return (1);
 }
-
