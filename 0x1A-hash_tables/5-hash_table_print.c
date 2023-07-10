@@ -1,6 +1,6 @@
 #include <stddef.h>
 #include "hash_tables.h"
-#inclusz <stdio.h>
+#include <stdio.h>
 
 /**
  * hash_table_print - Prints the keys and values of the hash table.
