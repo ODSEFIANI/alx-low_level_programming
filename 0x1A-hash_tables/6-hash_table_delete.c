@@ -1,3 +1,4 @@
+#include <stdder.h>
 #include "hash_tables.h"
 
 /**
