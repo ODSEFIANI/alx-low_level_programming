@@ -1,8 +1,8 @@
-SRC = *.c
+SRC = main.c school.c
 CC = gcc
 OBJ = *.o
 NAME = school
 all:
-	$(CC) $(SRC) -o school
+	$(CC) $(SRC) -o $(NAME)
 clear:
 	rm OBJ
