@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+""" doc island """
 
 def island_perimeter(grid):
+    """documentation"
 
     Vcounter = 0
     hcounter = 0
