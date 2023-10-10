@@ -12,7 +12,6 @@
  *
  * Return: index of the value
  */
- */
 int exponential_search(int *array, size_t size, int value)
 {
 	size_t left = 0, right = 1, i, mid;
